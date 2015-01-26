@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Bander - Bands{% endblock %}
+{% block content %}
+<h1>Currently Following:</h1>
+	<ul>
+	{% for item in following.all %}
+	    <li>{{ item }} <a id="remove_band" href="#"> Remove </a></li>
+	{% endfor %}
+	</ul>
+
+<h1>Not Yet Following:</h1>
+	<ul>
+	{% for item in notfollowing.all %}
+	    <li>{{ item }} <a id="add_band" href="#"> Add </a></li>
+	{% endfor %}
+	</ul>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Bander - Home{% endblock %}
+{% block content %}
+<h1>Upcoming Shows:</h1>
+	<ul>
+	{% for show in showList.all %}
+	    <li>{{ show }}</li>
+	{% endfor %}
+	</ul>
+
+<h1>Currently Following:</h1>
+	<ul>
+	{% for band in bandList.all %}
+	    <li>{{ band }}</li>
+	{% endfor %}
+	</ul>
+{% endblock %}
