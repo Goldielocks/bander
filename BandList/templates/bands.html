@@ -2,16 +2,20 @@
 {% block title %}Bander - Bands{% endblock %}
 {% block content %}
 <h1>Currently Following:</h1>
-	<ul>
+	<ul id="current">
 	{% for item in following.all %}
-	    <li>{{ item }} <a id="remove_band" href="#"> Remove </a></li>
+	     <a class="remove" id="remove{{item.id}}" data-id="{{item.id}}" href="#">
+	     	<li>{{ item }} </li>
+	     </a>
 	{% endfor %}
 	</ul>
 
 <h1>Not Yet Following:</h1>
-	<ul>
+	<ul id="unfollowed">
 	{% for item in notfollowing.all %}
-	    <li>{{ item }} <a id="add_band" href="#"> Add </a></li>
+	    <a class="add" id="add{{item.id}}" data-id="{{item.id}}" href="#">
+	    	<li>{{ item }}</li>
+	    </a>
 	{% endfor %}
 	</ul>
 {% endblock %}

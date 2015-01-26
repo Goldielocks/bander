@@ -4,14 +4,14 @@
 <h1>Currently Following:</h1>
 	<ul>
 	{% for item in following.all %}
-	    <li>{{ item }} <a id="remove_show" data-id="{{item.id}}" href="#"> Remove </a></li>
+	    <li>{{ item }} <a class="remove_show" id="remove{{item.id}}" data-id="{{item.id}}" href="#"> Remove </a></li>
 	{% endfor %}
 	</ul>
 
 <h1>Not Yet Following:</h1>
 	<ul>
 	{% for item in notfollowing.all %}
-	    <li>{{ item }} <a id="add_show" data-id="{{item.id}}" href="#"> Add </a></li>
+	    <li>{{ item }} <a class="add_show" id="add{{item.id}}"data-id="{{item.id}}" href="#"> Add </a></li>
 	{% endfor %}
 	</ul>
 {% endblock %}

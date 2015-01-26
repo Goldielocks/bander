@@ -2,19 +2,18 @@ $(document).ready(function() {
 
 });
 
-$('.add_band').click(function(){
-var id;
-id = $(this).attr("data-id");
- $.get('/BandList/add_band/', {caseId: id}, function(data){
-           $('#case').html(data.value);
-		   $('#case').attr('data-id', id);
-       });
+$('.add').click(function(){
+	var id = $(this).attr("data-id");
+	$.get('/BandList/add/', {id:id, dataType:"band"}, function(data){
+		var removedBand = $('#add' + id).remove().html();
+		$('#current').append(removedBand);
+	})
 })
 
-$('.remove_band').click(function(){
-var id;
-id = $(this).attr("data-id");
- $.get('/BandList/remove_band/', {mapId: id}, function(data){
-           $('#map').html(data.value);
-       });
+$('.remove').click(function(){
+	var id = $(this).attr("data-id");
+	$.get('/BandList/remove/', {id:id, dataType:"band"}, function(data){
+		var removedBand = $('#remove' + id).remove().html();
+		$('#unfollowed').append(removedBand);
+	})
 })

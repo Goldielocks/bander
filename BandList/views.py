@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response, render, redirect
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.template import RequestContext
 from BandList.models import Location, Genre, Band, Show, UserProfile
 from BandList.forms import UserForm, UserProfileForm
@@ -51,6 +51,39 @@ def shows(request):
 	return render_to_response('bands.html', {"following":showList, "notfollowing":totalList}, context)
 
 	return render(request, 'shows.html')
+
+@login_required
+def add(request):
+	context = RequestContext(request)
+	profile = UserProfile.objects.get(user = request.user)
+
+	if request.method == 'GET':
+		id = request.GET["id"]
+		dataType = request.GET["dataType"]
+
+		if dataType == 'band':
+			newData = Band.objects.get(id = id)
+			profile.bands.add(newData)
+			profile.save()
+
+
+	return JsonResponse( {"status":"okay"} )
+
+@login_required
+def remove(request):
+	context = RequestContext(request)
+	profile = UserProfile.objects.get(user = request.user)
+
+	if request.method == 'GET':
+		id = request.GET["id"]
+		dataType = request.GET["dataType"]
+		if dataType == 'band':
+			newData = Band.objects.get(id = id)
+			profile.bands.remove(newData)
+			profile.save()
+			
+	return HttpResponse("Things are good!")
+
 
 def base(request):
 	if not request.user.is_authenticated():
@@ -110,4 +143,3 @@ def register(request):
 		'register.html',
 		{'user_form':user_form, 'profile_form':profile_form, 'registered':registered},
 		context)
-
